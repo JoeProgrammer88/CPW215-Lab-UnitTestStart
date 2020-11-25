@@ -1,4 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.ComponentModel.DataAnnotations;
+using Validator = BusinessLogic.Validator;
 
 namespace BusinessLogicTests
 {
@@ -12,8 +14,9 @@ namespace BusinessLogicTests
         [DataRow("428-52-1234")]
         public void IsValidSsn_ValidInput_ReturnTrue(string input)
         {
-            //TODO: Test the IsValidSSN method in the Validator class
-            Assert.Fail();
+            bool isGoodSSN = Validator.IsSsn(input);
+
+            Assert.AreEqual(true, isGoodSSN);
         }
 
         [TestMethod]
@@ -23,19 +26,22 @@ namespace BusinessLogicTests
         [DataRow("TenLetters")]
         public void IsValidSsn_InvalidInput_ReturnsFalse(string input)
         {
-            //TODO: Test the IsValidSSN method in the Validator class
-            Assert.Fail();
+            bool isGoodSSN = Validator.IsSsn(input);
+
+            Assert.AreEqual(false, isGoodSSN);
         }
 
         [TestMethod]
-        [DataRow(10, 1, 10)] //max boundary
+        [DataRow(10, 1, 10)] //max boundary // testnumber min number max number
         [DataRow(1, 1, 10)] //min boundary
         [DataRow(5, 1, 10)]
         [DataRow(2000, 0, 50000)]
         public void IsWithinRange_NumInInclusiveRange_ReturnTrue(int test, int min, int max)
         {
-            //TODO: Test the IsWithinRange method in the Validator class
-            Assert.Fail();
+            bool whatIsBoolean = Validator.IsWithinRange(test, min, max);
+            bool isValid = test >= min && test <= max;
+
+            Assert.AreEqual(whatIsBoolean, isValid);
         }
 
         [TestMethod]
@@ -44,8 +50,10 @@ namespace BusinessLogicTests
         [DataRow(10000, 0, 5000)]
         public void IsWithinRange_NumOutsideInclusiveRange_ReturnsFalse(int test, int min, int max)
         {
-            //TODO: Test the IsWithinRange method in the Validator class
-            Assert.Fail();
+            bool whatIsBoolean = Validator.IsWithinRange(test, min, max);
+            bool isNotValid = test >= min && test <= max;
+
+            Assert.AreEqual(whatIsBoolean, isNotValid);
         }
     }
 }

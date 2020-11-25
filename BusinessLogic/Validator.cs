@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace BusinessLogic
 {
     public static class Validator
     {
+
         /// <summary>
         /// Determines if string is a valid Social Security number
         /// </summary>
@@ -11,7 +13,9 @@ namespace BusinessLogic
         /// <returns></returns>
         public static bool IsSsn(string ssn)
         {
-            throw new NotImplementedException();
+            string pattern = @"^(\d{3})([\s-]?)(\d{2})([\s-]?)(\d{4})$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(ssn);
         }
 
         /// <summary>
@@ -23,7 +27,7 @@ namespace BusinessLogic
         /// <returns></returns>
         public static bool IsWithinRange(int numToTest, int minValue, int maxValue)
         {
-            throw new NotImplementedException();
+            return numToTest >= minValue && numToTest <= maxValue;
         }
     }
 }
